@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.5",
+    "hono": "^4.10.2",
+    "pino": "^10.1.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@types/node": "^20.11.17",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.36.0",
+    "pino-pretty": "^13.1.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  },
+  "prettier": "@repo/prettier-config"
+}
