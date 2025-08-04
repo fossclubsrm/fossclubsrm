@@ -2,6 +2,7 @@ import type { H3Event } from "h3";
 import { createRouter, defineEventHandler, useBase } from "h3";
 
 import { errors } from "./constants/errors";
+import formsRouter from "./routes/forms";
 
 const router = createRouter();
 
@@ -14,6 +15,8 @@ router.get(
     };
   })
 );
+
+router.use("/forms/**", formsRouter.handler);
 
 router.get(
   "/*",

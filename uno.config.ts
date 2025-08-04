@@ -7,4 +7,8 @@ export default defineConfig({
     },
   },
   presets: [presetWind3(), presetAttributify()],
+  rules: [
+    ["decoration-none", { "text-decoration": "none" }],
+    ["no-underline", { "text-decoration": "none" }],
+  ],
 });
