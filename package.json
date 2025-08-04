@@ -10,13 +10,17 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "3.6.1",
     "@nuxt/eslint": "1.4.1",
     "@nuxt/icon": "1.14.0",
-    "better-sqlite3": "^12.1.1",
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@unocss/nuxt": "^66.3.2",
     "eslint": "^9.0.0",
     "nuxt": "^3.17.5",
+    "unocss": "^66.3.2",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }

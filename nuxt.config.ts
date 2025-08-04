@@ -1,6 +1,28 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: "2024-10-24",
+  modules: [
+    "@nuxt/icon",
+    "@unocss/nuxt",
+    "@nuxt/eslint",
+    "@nuxtjs/google-fonts",
+  ],
+  ssr: false,
   devtools: { enabled: true },
-  modules: ['@nuxt/icon', '@nuxt/eslint', '@nuxt/content']
-})
+  css: ["./app/app.css"],
+  srcDir: "app",
+  serverDir: "server",
+  nitro: {
+    experimental: {
+      wasm: true,
+    },
+  },
+  unocss: {
+    nuxtLayers: true,
+  },
+  googleFonts: {
+    families: {
+      Inter: "200..700",
+    },
+  },
+});
