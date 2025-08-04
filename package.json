@@ -12,7 +12,9 @@
   "dependencies": {
     "@nuxt/eslint": "1.4.1",
     "@nuxt/icon": "1.14.0",
+    "@nuxt/ui": "^3.3.0",
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@supabase/supabase-js": "^2.53.0",
     "@unocss/nuxt": "^66.3.2",
     "eslint": "^9.0.0",
     "nuxt": "^3.17.5",

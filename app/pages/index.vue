@@ -1,9 +1,46 @@
 <template>
-  <main class="w-screen h-screen flex items-center justify-center">
+  <div
+    class="min-h-screen bg-gradient-to-br from-foss-50 to-pixel-50 flex items-center justify-center"
+  >
     <div class="text-center">
-      <img src="/images/logo.png" alt="FOSS Club SRM Logo" class="w-32 h-32" />
-      <h1 class="text-4xl font-bold mb-4">Welcome to FOSS Club SRM</h1>
-      <p class="text-lg">This is the home page of the FOSS Club SRM website.</p>
+      <div
+        class="w-24 h-24 bg-foss-500 rounded-full flex items-center justify-center mx-auto mb-8"
+      >
+        <UIcon name="i-heroicons-document-text" class="w-12 h-12 text-white" />
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">FOSS Forms</h1>
+      <p class="text-xl text-gray-600 mb-8">
+        Dynamic forms builder with beautiful UI
+      </p>
+      <div class="flex items-center justify-center space-x-4">
+        <UButton
+          to="/admin"
+          color="foss"
+          variant="solid"
+          size="lg"
+          icon="i-heroicons-cog-6-tooth"
+        >
+          Admin Panel
+        </UButton>
+        <UButton
+          to="/form/1"
+          color="pixel"
+          variant="outline"
+          size="lg"
+          icon="i-heroicons-document-text"
+        >
+          View Sample Form
+        </UButton>
+      </div>
     </div>
-  </main>
+  </div>
 </template>
+
+<script setup>
+// Redirect to admin panel after a short delay
+onMounted(() => {
+  setTimeout(() => {
+    navigateTo("/admin");
+  }, 3000);
+});
+</script>
