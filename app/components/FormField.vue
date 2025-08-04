@@ -76,8 +76,11 @@ const getRatingArray = () => {
       :type="field.type"
       :value="modelValue || ''"
       :placeholder="field.placeholder"
-      class="w-full sm:w-96 md:w-full max-w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white transition-all"
-      :class="{ 'border-red-500': error }"
+      class="w-full sm:w-96 md:w-full max-w-full h-12 px-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white transition-all"
+      :class="{
+        'border-red-500 ring-red-200': error,
+        'border-gray-300': !error,
+      }"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement)?.value)
       "
@@ -89,8 +92,11 @@ const getRatingArray = () => {
       :value="modelValue || ''"
       :placeholder="field.placeholder"
       rows="4"
-      class="w-full sm:w-96 md:w-full max-w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white resize-vertical transition-all"
-      :class="{ 'border-red-500': error }"
+      class="w-full sm:w-96 md:w-full max-w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white resize-vertical transition-all"
+      :class="{
+        'border-red-500 ring-red-200': error,
+        'border-gray-300': !error,
+      }"
       @input="
         $emit(
           'update:modelValue',
@@ -103,8 +109,11 @@ const getRatingArray = () => {
       v-else-if="field.type === 'select'"
       :id="field.name"
       :value="modelValue || ''"
-      class="w-full sm:w-96 md:w-full max-w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white cursor-pointer appearance-none transition-all"
-      :class="{ 'border-red-500': error }"
+      class="w-full sm:w-96 md:w-full max-w-full h-12 px-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-neutral-950 bg-white cursor-pointer appearance-none transition-all"
+      :class="{
+        'border-red-500 ring-red-200': error,
+        'border-gray-300': !error,
+      }"
       @change="
         $emit('update:modelValue', ($event.target as HTMLSelectElement)?.value)
       "
@@ -115,24 +124,27 @@ const getRatingArray = () => {
       </option>
     </select>
 
-    <div v-else-if="field.type === 'rating'" class="flex items-center gap-2">
-      <button
-        v-for="rating in getRatingArray()"
-        :key="rating"
-        type="button"
-        :class="[
-          'w-8 h-8 rounded-full border-2 cursor-pointer transition-all',
-          rating <= (modelValue || 0)
-            ? 'bg-green-500 border-green-500 text-white'
-            : 'border-gray-300 text-gray-400 hover:border-green-300',
-        ]"
-        @click="handleRatingClick(rating)"
-      >
-        {{ rating }}
-      </button>
-      <span class="ml-2 text-sm text-neutral-600">
-        {{ modelValue ? `${modelValue}/5` : "Click to rate" }}
-      </span>
+    <div v-else-if="field.type === 'rating'" class="space-y-2">
+      <div class="flex items-center gap-2">
+        <button
+          v-for="rating in getRatingArray()"
+          :key="rating"
+          type="button"
+          :class="[
+            'w-10 h-10 rounded-lg border-2 font-medium transition-all duration-200',
+            rating <= (modelValue || 0)
+              ? 'bg-green-500 border-green-500 text-white shadow-md'
+              : 'bg-gray-100 border-gray-300 text-gray-600 hover:bg-gray-200',
+            error ? 'ring-2 ring-red-200' : '',
+          ]"
+          @click="handleRatingClick(rating)"
+        >
+          {{ rating }}
+        </button>
+        <span class="ml-2 text-sm text-neutral-600">
+          {{ modelValue ? `${modelValue}/5` : "Not rated" }}
+        </span>
+      </div>
     </div>
 
     <div v-else-if="field.type === 'checkbox'" class="space-y-3">
@@ -144,19 +156,18 @@ const getRatingArray = () => {
         <input
           :id="`${field.name}-${option}`"
           type="checkbox"
-          :value="option"
           :checked="isOptionSelected(option)"
-          class="w-4 h-4 text-green-600 border-gray-300 rounded focus:outline-none focus:ring-green-500 cursor-pointer"
+          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500"
           @change="
             handleCheckboxChange(
               option,
-              ($event.target as HTMLInputElement).checked
+              ($event.target as HTMLInputElement)?.checked
             )
           "
         />
         <label
           :for="`${field.name}-${option}`"
-          class="ml-3 text-sm text-neutral-950 cursor-pointer"
+          class="ml-2 text-sm font-medium text-neutral-950"
         >
           {{ option }}
         </label>
@@ -171,22 +182,35 @@ const getRatingArray = () => {
       >
         <input
           :id="`${field.name}-${option}`"
-          type="radio"
           :name="field.name"
+          type="radio"
           :value="option"
           :checked="modelValue === option"
-          class="w-4 h-4 text-green-600 border-gray-300 focus:outline-none focus:ring-green-500 cursor-pointer"
+          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500"
           @change="$emit('update:modelValue', option)"
         />
         <label
           :for="`${field.name}-${option}`"
-          class="ml-3 text-sm text-neutral-950 cursor-pointer"
+          class="ml-2 text-sm font-medium text-neutral-950"
         >
           {{ option }}
         </label>
       </div>
     </div>
 
-    <p v-if="error" class="text-sm text-red-600">{{ error }}</p>
+    <div v-if="error" class="flex items-start space-x-2">
+      <svg
+        class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <p class="text-sm text-red-600">{{ error }}</p>
+    </div>
   </div>
 </template>

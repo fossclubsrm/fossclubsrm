@@ -10,10 +10,7 @@ export interface FormField {
 
 export interface FormSubmission {
   _id?: string;
-  formId: string;
-  formTitle: string;
   fields: FormField[];
   submittedData: Record<string, any>;
   submittedAt: Date;
-  ipAddress?: string;
 }

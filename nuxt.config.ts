@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
   ],
   ssr: false,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ["./app/app.css"],
   srcDir: "app",
   serverDir: "server",
@@ -24,5 +24,8 @@ export default defineNuxtConfig({
     families: {
       Inter: "200..700",
     },
+  },
+  runtimeConfig: {
+    mongodbUri: process.env.MONGODB_URI,
   },
 });
